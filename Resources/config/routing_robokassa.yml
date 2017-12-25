@@ -1,0 +1,17 @@
+payments_robokassa_query:
+    path: /query-{id}/
+    defaults: { _controller: KrealabPaymentBundle:Robokassa:query }
+    requirements:
+        id: \d+
+
+payments_robokassa_result:
+    path: /result/
+    defaults: { _controller: KrealabPaymentBundle:Robokassa:result }
+
+payments_robokassa_success:
+    path: /success/
+    defaults: { _controller: KrealabPaymentBundle:Robokassa:renderSuccess }
+
+payments_robokassa_fail:
+    path: /fail/
+    defaults: { _controller: KrealabPaymentBundle:Robokassa:renderFail }

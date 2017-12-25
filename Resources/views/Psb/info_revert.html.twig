@@ -1,0 +1,54 @@
+{% extends layout %}
+
+{% block content %}
+    {% if check_paid %}
+        <div id="info">
+            <div class="alert alert-info">
+                <p>Ожидается ответ от платёжной системы.</p>
+            </div>
+        </div>
+        <div id="success" style="display:none">
+            <div class="alert alert-success">
+                <strong>Возврат денег был успешно завершён.</strong>
+                <p>Вы будете автоматически перенаправлены на следующую страницу.</p>
+            </div>
+        </div>
+        <div id="fail" style="display:none">
+            <div class="alert alert-danger">
+                <strong>Возврат денег был отклонён.</strong>
+                <p>Вы будете автоматически перенаправлены на следующую страницу.</p>
+            </div>
+        </div>
+    {% else %}
+        <div id="info">
+            <div class="alert alert-info">
+                <p>Операция завершена.</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    {% if check_paid %}
+        var interval = setInterval(function() {
+            $.getJSON('{{ path(check_route) }}',{
+                type: '{{ type }}',
+                log_id: {{ log_id }}
+            }, function(status) {
+                if (status == 'fail' || status == 'paid') {
+                    $('#info').hide();
+                    $('#success').toggle(status == 'paid');
+                    $('#fail').toggle(status == 'fail');
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        window.location = '{{ path(back_route) }}';
+                    }, 2000);
+                }
+            });
+        }, 3000);
+    {% endif %}
+});
+</script>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends layout %}
+
+{% block content %}
+    <div class="alert alert-danger">
+        <strong>Платёж был отклонён.</strong>
+        <p>Вы будете автоматически перенаправлены на следующую страницу.</p>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    window.setTimeout(function() {
+        window.location = '{{ path(back_route) }}';
+    }, 2000);
+});
+</script>
+{% endblock %}

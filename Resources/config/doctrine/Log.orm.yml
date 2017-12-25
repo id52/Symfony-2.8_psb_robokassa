@@ -1,0 +1,34 @@
+KreaLab\PaymentBundle\Entity\Log:
+    type: mappedSuperclass
+    table: payments_logs
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        s_type:
+            type: string
+            nullable: true
+        s_id:
+            type: string
+            nullable: true
+        sum:
+            type: integer
+        paid:
+            type: boolean
+        info:
+            type: array
+        revert_log_id:
+            type: integer
+            nullable: true
+        created_at:
+            type: datetime
+            gedmo: { timestampable: { on: create } }
+        updated_at:
+            type: datetime
+            gedmo: { timestampable: { on: update } }
+    manyToOne:
+        paid_log:
+            targetEntity: Log
+            joinColumn: { onDelete: SET NULL }
+

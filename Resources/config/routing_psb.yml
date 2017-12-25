@@ -1,0 +1,21 @@
+payments_psb_query:
+    path: /query-{id}/
+    defaults: { _controller: KrealabPaymentBundle:Psb:query }
+    requirements:
+        id: \d+
+
+payments_psb_result:
+    path: /result/
+    defaults: { _controller: KrealabPaymentBundle:Psb:result }
+
+payments_psb_info:
+    path: /info/
+    defaults: { _controller: KrealabPaymentBundle:Psb:renderInfoPayment }
+
+payments_psb_info_revert:
+    path: /info-revert/
+    defaults: { _controller: KrealabPaymentBundle:Psb:renderInfoRevert }
+
+payments_psb_ajax_status:
+    path: /status/
+    defaults: { _controller: KrealabPaymentBundle:Psb:getStatusAjax }

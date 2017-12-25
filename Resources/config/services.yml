@@ -1,0 +1,10 @@
+services:
+    krealab_payment.service.robokassa:
+        class: KreaLab\PaymentBundle\Service\PaymentServiceRobokassa
+        arguments: [ '@doctrine.orm.entity_manager', '@templating' ]
+    krealab_payment.service.psb:
+        class: KreaLab\PaymentBundle\Service\PaymentServicePsb
+        arguments: [ '@doctrine.orm.entity_manager', '@templating', '@request_stack', '@security.token_storage' ]
+    krealab_payment.service.parameters:
+        class: KreaLab\PaymentBundle\Service\ParametersService
+        arguments: [ '%krealab_payment%', '@twig', '@request_stack', '@controller_name_converter', '@router' ]
